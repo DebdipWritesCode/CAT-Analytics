@@ -14,7 +14,8 @@ import {
   useSidebar,
 } from "@/components/ui/sidebar";
 import { SHEET_NAMES } from "@/lib/types";
-import { fetchSheetData, type SheetData } from "@/lib/sheets";
+import { fetchSheetData } from "@/lib/sheets";
+import { SheetData } from "@/lib/types";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -46,7 +47,7 @@ const SHEET_COMPONENTS: Record<string, React.ComponentType<{ data: SheetData }>>
   Mock_Reflection: MockReflection,
 };
 
-function DashboardSidebar({ onSheetChange }: { onSheetChange: (sheet: string) => void }) {
+function DashboardSidebar({ onSheetChange }: { onSheetChange: (sheet: (typeof SHEET_NAMES)[number]) => void }) {
   const { setOpenMobile } = useSidebar();
 
   return (
@@ -82,7 +83,7 @@ export default function DashboardPage() {
   const [sheetData, setSheetData] = useState<SheetData | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [selectedSheet, setSelectedSheet] = useState(SHEET_NAMES[0]);
+  const [selectedSheet, setSelectedSheet] = useState<(typeof SHEET_NAMES)[number]>(SHEET_NAMES[0]);
 
   useEffect(() => {
     // Check if sheet ID exists
@@ -96,7 +97,7 @@ export default function DashboardPage() {
     async function loadData() {
       setLoading(true);
       setError(null);
-      const data = await fetchSheetData(sheetId);
+      const data = await fetchSheetData(sheetId as string);
       if (data) {
         setSheetData(data);
       } else {
@@ -108,7 +109,7 @@ export default function DashboardPage() {
     loadData();
   }, [router]);
 
-  const handleSheetChange = (sheet: string) => {
+  const handleSheetChange = (sheet: (typeof SHEET_NAMES)[number]) => {
     setSelectedSheet(sheet);
   };
 
