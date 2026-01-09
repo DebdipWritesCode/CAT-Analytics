@@ -3,7 +3,7 @@ import { google } from "googleapis";
 import { SHEET_NAMES } from "@/lib/types";
 
 // Initialize Google Sheets API
-async function getSheetsClient() {
+function getSheetsClient() {
   const auth = new google.auth.GoogleAuth({
     credentials: {
       client_email: process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL,
@@ -12,8 +12,7 @@ async function getSheetsClient() {
     scopes: ["https://www.googleapis.com/auth/spreadsheets.readonly"],
   });
 
-  const authClient = await auth.getClient();
-  return google.sheets({ version: "v4", auth: authClient });
+  return google.sheets({ version: "v4", auth });
 }
 
 export async function GET(request: NextRequest) {
@@ -28,7 +27,7 @@ export async function GET(request: NextRequest) {
       );
     }
 
-    const sheets = await getSheetsClient();
+    const sheets = getSheetsClient();
 
     // Fetch all sheets in parallel
     const sheetPromises = SHEET_NAMES.map(async (sheetName) => {
