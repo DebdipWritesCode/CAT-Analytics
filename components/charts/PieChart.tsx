@@ -8,6 +8,7 @@ import {
   Legend,
   ResponsiveContainer,
 } from "recharts";
+import { CHART_COLORS } from "@/lib/colors";
 
 interface PieData {
   name: string;
@@ -21,13 +22,7 @@ interface PieChartProps {
   height?: number;
 }
 
-const DEFAULT_COLORS = [
-  "hsl(var(--chart-1))",
-  "hsl(var(--chart-2))",
-  "hsl(var(--chart-3))",
-  "hsl(var(--chart-4))",
-  "hsl(var(--chart-5))",
-];
+const DEFAULT_COLORS = CHART_COLORS.extended;
 
 export default function PieChart({
   data,
@@ -62,7 +57,7 @@ export default function PieChart({
             borderRadius: "var(--radius)",
           }}
         />
-        <Legend />
+        <Legend wrapperStyle={{ color: "#e5e7eb" }} />
       </RechartsPieChart>
     </ResponsiveContainer>
   );

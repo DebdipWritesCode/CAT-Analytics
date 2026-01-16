@@ -4,6 +4,7 @@ import { SheetData } from "@/lib/types";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import BarChart from "@/components/charts/BarChart";
 import LineChart from "@/components/charts/LineChart";
+import { CHART_COLORS } from "@/lib/colors";
 
 interface RCPassageLogProps {
   data: SheetData;
@@ -47,7 +48,7 @@ export default function RCPassageLog({ data }: RCPassageLogProps) {
             data={accuracyByThemeData}
             xKey="theme"
             bars={[
-              { name: "Accuracy %", dataKey: "accuracy", color: "hsl(var(--chart-1))" },
+              { name: "Accuracy %", dataKey: "accuracy", color: CHART_COLORS.semantic.positive },
             ]}
             xLabel="Passage Theme"
             yLabel="Accuracy %"
@@ -67,7 +68,7 @@ export default function RCPassageLog({ data }: RCPassageLogProps) {
             yKey="accuracy"
             xLabel="Passage"
             yLabel="Accuracy %"
-            color="hsl(var(--chart-1))"
+            color={CHART_COLORS.primary[0]}
             height={400}
           />
         </CardContent>

@@ -4,6 +4,7 @@ import { SheetData } from "@/lib/types";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import ScatterPlot from "@/components/charts/ScatterPlot";
 import BarChart from "@/components/charts/BarChart";
+import { CHART_COLORS, getSectionColor } from "@/lib/colors";
 
 interface QuestionLevelAnalysisProps {
   data: SheetData;
@@ -19,12 +20,7 @@ export default function QuestionLevelAnalysis({ data }: QuestionLevelAnalysisPro
       x: q.timeTaken,
       y: q.correct ? 1 : 0,
       section: q.section,
-      color:
-        q.section === "VARC"
-          ? "hsl(var(--chart-1))"
-          : q.section === "DILR"
-          ? "hsl(var(--chart-2))"
-          : "hsl(var(--chart-3))",
+      color: getSectionColor(q.section),
     }));
 
   // Prepare data for Wrong Reasons Distribution
@@ -56,11 +52,7 @@ export default function QuestionLevelAnalysis({ data }: QuestionLevelAnalysisPro
             colorKey="section"
             xLabel="Time Taken (seconds)"
             yLabel="Correct (1/0)"
-            colors={[
-              "hsl(var(--chart-1))",
-              "hsl(var(--chart-2))",
-              "hsl(var(--chart-3))",
-            ]}
+            colors={[getSectionColor("VARC"), getSectionColor("DILR"), getSectionColor("QA")]}
           />
         </CardContent>
       </Card>
@@ -75,7 +67,7 @@ export default function QuestionLevelAnalysis({ data }: QuestionLevelAnalysisPro
             data={wrongReasonsData}
             xKey="reason"
             bars={[
-              { name: "Count", dataKey: "count", color: "hsl(var(--chart-1))" },
+              { name: "Count", dataKey: "count", color: CHART_COLORS.primary[0] },
             ]}
             xLabel="Error Type"
             yLabel="Count"

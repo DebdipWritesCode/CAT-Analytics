@@ -4,6 +4,7 @@ import { SheetData } from "@/lib/types";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import PieChart from "@/components/charts/PieChart";
 import BarChart from "@/components/charts/BarChart";
+import { CHART_COLORS } from "@/lib/colors";
 
 interface UnattemptedQuestionsAuditProps {
   data: SheetData;
@@ -58,7 +59,7 @@ export default function UnattemptedQuestionsAudit({ data }: UnattemptedQuestions
             data={shouldAttemptData}
             xKey="category"
             bars={[
-              { name: "Count", dataKey: "count", color: "hsl(var(--chart-1))" },
+              { name: "Count", dataKey: "count", color: CHART_COLORS.primary[0] },
             ]}
             xLabel="Category"
             yLabel="Count"

@@ -5,6 +5,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import LineChart from "@/components/charts/LineChart";
 import MultiLineChart from "@/components/charts/MultiLineChart";
 import BarChart from "@/components/charts/BarChart";
+import { CHART_COLORS, getSectionColor } from "@/lib/colors";
 
 interface MockOverviewProps {
   data: SheetData;
@@ -71,7 +72,7 @@ export default function MockOverview({ data }: MockOverviewProps) {
             yKey="percentile"
             xLabel="Mock No"
             yLabel="Overall Percentile"
-            color="hsl(var(--chart-1))"
+            color={CHART_COLORS.primary[0]}
           />
         </CardContent>
       </Card>
@@ -86,9 +87,9 @@ export default function MockOverview({ data }: MockOverviewProps) {
             data={sectionPercentile}
             xKey="mockNo"
             lines={[
-              { name: "VARC %ile", dataKey: "VARC %ile", color: "hsl(var(--chart-1))" },
-              { name: "DILR %ile", dataKey: "DILR %ile", color: "hsl(var(--chart-2))" },
-              { name: "QA %ile", dataKey: "QA %ile", color: "hsl(var(--chart-3))" },
+              { name: "VARC %ile", dataKey: "VARC %ile", color: getSectionColor("VARC") },
+              { name: "DILR %ile", dataKey: "DILR %ile", color: getSectionColor("DILR") },
+              { name: "QA %ile", dataKey: "QA %ile", color: getSectionColor("QA") },
             ]}
             xLabel="Mock No"
             yLabel="Percentile"
@@ -106,8 +107,8 @@ export default function MockOverview({ data }: MockOverviewProps) {
             data={attemptsAccuracy}
             xKey="section"
             bars={[
-              { name: "Attempts", dataKey: "Attempts", color: "hsl(var(--chart-1))" },
-              { name: "Correct", dataKey: "Correct", color: "hsl(var(--chart-2))" },
+              { name: "Attempts", dataKey: "Attempts", color: CHART_COLORS.primary[0] },
+              { name: "Correct", dataKey: "Correct", color: CHART_COLORS.semantic.positive },
             ]}
             xLabel="Section"
             yLabel="Count"

@@ -4,6 +4,7 @@ import { SheetData } from "@/lib/types";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import BarChart from "@/components/charts/BarChart";
 import ScatterPlot from "@/components/charts/ScatterPlot";
+import { CHART_COLORS } from "@/lib/colors";
 
 interface DILRSetSelectionLogProps {
   data: SheetData;
@@ -35,8 +36,8 @@ export default function DILRSetSelectionLog({ data }: DILRSetSelectionLogProps) 
     y: set.questionsSolved,
     solvable: set.wasSetSolvable,
     color: set.wasSetSolvable
-      ? "hsl(var(--chart-1))"
-      : "hsl(var(--chart-2))",
+      ? CHART_COLORS.semantic.positive
+      : CHART_COLORS.semantic.negative,
   }));
 
   return (
@@ -51,8 +52,8 @@ export default function DILRSetSelectionLog({ data }: DILRSetSelectionLogProps) 
             data={solvableAttemptedData}
             xKey="mockNo"
             bars={[
-              { name: "Solvable", dataKey: "solvable", color: "hsl(var(--chart-1))" },
-              { name: "Attempted", dataKey: "attempted", color: "hsl(var(--chart-2))" },
+              { name: "Solvable", dataKey: "solvable", color: CHART_COLORS.semantic.positive },
+              { name: "Attempted", dataKey: "attempted", color: CHART_COLORS.primary[0] },
             ]}
             xLabel="Mock"
             yLabel="Count"
@@ -73,7 +74,7 @@ export default function DILRSetSelectionLog({ data }: DILRSetSelectionLogProps) 
             colorKey="solvable"
             xLabel="Time Spent (seconds)"
             yLabel="Questions Solved"
-            colors={["hsl(var(--chart-1))", "hsl(var(--chart-2))"]}
+            colors={[CHART_COLORS.semantic.positive, CHART_COLORS.semantic.negative]}
           />
         </CardContent>
       </Card>

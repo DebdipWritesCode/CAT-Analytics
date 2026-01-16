@@ -4,6 +4,7 @@ import { SheetData } from "@/lib/types";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import LineChart from "@/components/charts/LineChart";
 import StackedBarChart from "@/components/charts/StackedBarChart";
+import { CHART_COLORS } from "@/lib/colors";
 
 interface ErrorLogProps {
   data: SheetData;
@@ -55,7 +56,7 @@ export default function ErrorLog({ data }: ErrorLogProps) {
             yKey="errors"
             xLabel="Mock"
             yLabel="Error Count"
-            color="hsl(var(--chart-1))"
+            color={CHART_COLORS.primary[0]}
           />
         </CardContent>
       </Card>
@@ -70,10 +71,10 @@ export default function ErrorLog({ data }: ErrorLogProps) {
             data={errorTypesByMock}
             xKey="mockNo"
             bars={[
-              { name: "Concept", dataKey: "Concept", color: "hsl(var(--chart-1))" },
-              { name: "Silly", dataKey: "Silly", color: "hsl(var(--chart-2))" },
-              { name: "Reading", dataKey: "Reading", color: "hsl(var(--chart-3))" },
-              { name: "Time", dataKey: "Time", color: "hsl(var(--chart-4))" },
+              { name: "Concept", dataKey: "Concept", color: CHART_COLORS.stacked.concept },
+              { name: "Silly", dataKey: "Silly", color: CHART_COLORS.stacked.silly },
+              { name: "Reading", dataKey: "Reading", color: CHART_COLORS.stacked.reading },
+              { name: "Time", dataKey: "Time", color: CHART_COLORS.stacked.time },
             ]}
             xLabel="Mock"
             yLabel="Error Count"

@@ -11,6 +11,7 @@ import {
   ResponsiveContainer,
   Cell,
 } from "recharts";
+import { CHART_COLORS } from "@/lib/colors";
 
 interface ScatterData {
   x: number;
@@ -35,7 +36,7 @@ export default function ScatterPlot({
   xKey,
   yKey,
   colorKey,
-  colors = ["hsl(var(--chart-1))", "hsl(var(--chart-2))", "hsl(var(--chart-3))"],
+  colors = CHART_COLORS.primary.slice(0, 3),
   xLabel,
   yLabel,
   height = 300,
@@ -53,18 +54,20 @@ export default function ScatterPlot({
   return (
     <ResponsiveContainer width="100%" height={height}>
       <RechartsScatterChart margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
-        <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
+        <CartesianGrid strokeDasharray="3 3" stroke="rgba(255, 255, 255, 0.1)" />
         <XAxis
           type="number"
           dataKey={xKey}
-          label={{ value: xLabel, position: "insideBottom", offset: -5 }}
-          stroke="hsl(var(--muted-foreground))"
+          label={{ value: xLabel, position: "insideBottom", offset: -5, fill: "#e5e7eb" }}
+          stroke="#9ca3af"
+          tick={{ fill: "#e5e7eb" }}
         />
         <YAxis
           type="number"
           dataKey={yKey}
-          label={{ value: yLabel, angle: -90, position: "insideLeft" }}
-          stroke="hsl(var(--muted-foreground))"
+          label={{ value: yLabel, angle: -90, position: "insideLeft", fill: "#e5e7eb" }}
+          stroke="#9ca3af"
+          tick={{ fill: "#e5e7eb" }}
         />
         <Tooltip
           cursor={{ strokeDasharray: "3 3" }}
@@ -74,7 +77,7 @@ export default function ScatterPlot({
             borderRadius: "var(--radius)",
           }}
         />
-        <Legend />
+        <Legend wrapperStyle={{ color: "#e5e7eb" }} />
         {Object.entries(groupedData).map(([key, groupData], index) => (
           <Scatter
             key={key}

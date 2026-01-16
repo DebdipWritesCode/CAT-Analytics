@@ -4,6 +4,7 @@ import { SheetData } from "@/lib/types";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import LineChart from "@/components/charts/LineChart";
 import RadarChart from "@/components/charts/RadarChart";
+import { CHART_COLORS } from "@/lib/colors";
 
 interface MockReflectionProps {
   data: SheetData;
@@ -38,7 +39,7 @@ export default function MockReflection({ data }: MockReflectionProps) {
         subject: `Mock ${r.mockNo}`,
         value: r.focusLevel,
       })),
-      color: "hsl(var(--chart-1))",
+      color: CHART_COLORS.primary[0],
     },
     {
       name: "Confidence",
@@ -46,7 +47,7 @@ export default function MockReflection({ data }: MockReflectionProps) {
         subject: `Mock ${r.mockNo}`,
         value: r.confidenceAfterMock,
       })),
-      color: "hsl(var(--chart-2))",
+      color: CHART_COLORS.primary[1],
     },
     {
       name: "Calmness",
@@ -54,7 +55,7 @@ export default function MockReflection({ data }: MockReflectionProps) {
         subject: `Mock ${r.mockNo}`,
         value: 10 - r.stressLevel,
       })),
-      color: "hsl(var(--chart-3))",
+      color: CHART_COLORS.primary[2],
     },
   ];
 
@@ -72,7 +73,7 @@ export default function MockReflection({ data }: MockReflectionProps) {
             yKey="stress"
             xLabel="Mock No"
             yLabel="Stress Level"
-            color="hsl(var(--chart-1))"
+            color={CHART_COLORS.primary[0]}
           />
         </CardContent>
       </Card>

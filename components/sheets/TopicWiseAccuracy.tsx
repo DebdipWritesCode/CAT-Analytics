@@ -4,6 +4,7 @@ import { SheetData } from "@/lib/types";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import BarChart from "@/components/charts/BarChart";
 import BubbleChart from "@/components/charts/BubbleChart";
+import { CHART_COLORS } from "@/lib/colors";
 
 interface TopicWiseAccuracyProps {
   data: SheetData;
@@ -29,10 +30,10 @@ export default function TopicWiseAccuracy({ data }: TopicWiseAccuracyProps) {
     name: t.topic,
     color:
       t.strengthLevel === "Strong"
-        ? "hsl(var(--chart-1))"
+        ? CHART_COLORS.semantic.positive
         : t.strengthLevel === "Medium"
-        ? "hsl(var(--chart-2))"
-        : "hsl(var(--chart-3))",
+        ? CHART_COLORS.primary[2]
+        : CHART_COLORS.semantic.negative,
   }));
 
   return (
@@ -47,7 +48,7 @@ export default function TopicWiseAccuracy({ data }: TopicWiseAccuracyProps) {
             data={accuracyByTopic}
             xKey="topic"
             bars={[
-              { name: "Accuracy %", dataKey: "accuracy", color: "hsl(var(--chart-1))" },
+              { name: "Accuracy %", dataKey: "accuracy", color: CHART_COLORS.semantic.positive },
             ]}
             xLabel="Topic"
             yLabel="Accuracy %"

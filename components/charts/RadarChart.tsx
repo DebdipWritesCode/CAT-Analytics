@@ -10,6 +10,7 @@ import {
   ResponsiveContainer,
   Tooltip,
 } from "recharts";
+import { CHART_COLORS } from "@/lib/colors";
 
 interface RadarData {
   subject: string;
@@ -50,15 +51,17 @@ export default function RadarChart({
   return (
     <ResponsiveContainer width="100%" height={height}>
       <RechartsRadarChart data={chartData}>
-        <PolarGrid stroke="hsl(var(--border))" />
+        <PolarGrid stroke="rgba(255, 255, 255, 0.2)" />
         <PolarAngleAxis
           dataKey="subject"
-          stroke="hsl(var(--muted-foreground))"
+          stroke="#9ca3af"
+          tick={{ fill: "#e5e7eb" }}
         />
         <PolarRadiusAxis
           angle={90}
           domain={[0, 10]}
-          stroke="hsl(var(--muted-foreground))"
+          stroke="#9ca3af"
+          tick={{ fill: "#e5e7eb" }}
         />
         <Tooltip
           contentStyle={{
@@ -67,7 +70,7 @@ export default function RadarChart({
             borderRadius: "var(--radius)",
           }}
         />
-        <Legend />
+        <Legend wrapperStyle={{ color: "#e5e7eb" }} />
         {series.map((s) => (
           <Radar
             key={s.name}

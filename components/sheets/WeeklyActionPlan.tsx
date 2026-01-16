@@ -4,6 +4,7 @@ import { SheetData } from "@/lib/types";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import ProgressBar from "@/components/charts/ProgressBar";
 import LineChart from "@/components/charts/LineChart";
+import { CHART_COLORS } from "@/lib/colors";
 
 interface WeeklyActionPlanProps {
   data: SheetData;
@@ -65,7 +66,7 @@ export default function WeeklyActionPlan({ data }: WeeklyActionPlanProps) {
             yKey="target"
             xLabel="Week"
             yLabel="Target Questions"
-            color="hsl(var(--chart-1))"
+            color={CHART_COLORS.primary[0]}
           />
         </CardContent>
       </Card>

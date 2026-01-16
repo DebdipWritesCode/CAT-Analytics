@@ -10,6 +10,7 @@ import {
   Legend,
   ResponsiveContainer,
 } from "recharts";
+import { CHART_COLORS } from "@/lib/colors";
 
 interface BubbleData {
   x: number;
@@ -38,23 +39,25 @@ export default function BubbleChart({
   xLabel,
   yLabel,
   height = 300,
-  colors = ["hsl(var(--chart-1))", "hsl(var(--chart-2))", "hsl(var(--chart-3))"],
+  colors = CHART_COLORS.primary.slice(0, 3),
 }: BubbleChartProps) {
   return (
     <ResponsiveContainer width="100%" height={height}>
       <RechartsScatterChart margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
-        <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
+        <CartesianGrid strokeDasharray="3 3" stroke="rgba(255, 255, 255, 0.1)" />
         <XAxis
           type="number"
           dataKey={xKey}
-          label={{ value: xLabel, position: "insideBottom", offset: -5 }}
-          stroke="hsl(var(--muted-foreground))"
+          label={{ value: xLabel, position: "insideBottom", offset: -5, fill: "#e5e7eb" }}
+          stroke="#9ca3af"
+          tick={{ fill: "#e5e7eb" }}
         />
         <YAxis
           type="number"
           dataKey={yKey}
-          label={{ value: yLabel, angle: -90, position: "insideLeft" }}
-          stroke="hsl(var(--muted-foreground))"
+          label={{ value: yLabel, angle: -90, position: "insideLeft", fill: "#e5e7eb" }}
+          stroke="#9ca3af"
+          tick={{ fill: "#e5e7eb" }}
         />
         <Tooltip
           cursor={{ strokeDasharray: "3 3" }}
@@ -64,11 +67,11 @@ export default function BubbleChart({
             borderRadius: "var(--radius)",
           }}
         />
-        <Legend />
+        <Legend wrapperStyle={{ color: "#e5e7eb" }} />
         <Scatter 
           name="Topics" 
           data={data} 
-          fill="hsl(var(--chart-1))"
+          fill={CHART_COLORS.primary[0]}
           shape={(props: any) => {
             const { cx, cy, payload } = props;
             const size = Math.sqrt(payload[sizeKey] || 1) * 3;
@@ -77,7 +80,7 @@ export default function BubbleChart({
                 cx={cx}
                 cy={cy}
                 r={size}
-                fill={payload.color || "hsl(var(--chart-1))"}
+                fill={payload.color || CHART_COLORS.primary[0]}
                 opacity={0.6}
               />
             );

@@ -10,6 +10,7 @@ import {
   Legend,
   ResponsiveContainer,
 } from "recharts";
+import { DEFAULT_CHART_COLORS } from "@/lib/colors";
 
 interface LineChartProps {
   data: any[];
@@ -27,21 +28,23 @@ export default function LineChart({
   yKey,
   xLabel,
   yLabel,
-  color = "hsl(var(--chart-1))",
+  color = DEFAULT_CHART_COLORS[0],
   height = 300,
 }: LineChartProps) {
   return (
     <ResponsiveContainer width="100%" height={height}>
       <RechartsLineChart data={data} margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
-        <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
+        <CartesianGrid strokeDasharray="3 3" stroke="rgba(255, 255, 255, 0.1)" />
         <XAxis
           dataKey={xKey}
-          label={{ value: xLabel, position: "insideBottom", offset: -5 }}
-          stroke="hsl(var(--muted-foreground))"
+          label={{ value: xLabel, position: "insideBottom", offset: -5, fill: "#e5e7eb" }}
+          stroke="#9ca3af"
+          tick={{ fill: "#e5e7eb" }}
         />
         <YAxis
-          label={{ value: yLabel, angle: -90, position: "insideLeft" }}
-          stroke="hsl(var(--muted-foreground))"
+          label={{ value: yLabel, angle: -90, position: "insideLeft", fill: "#e5e7eb" }}
+          stroke="#9ca3af"
+          tick={{ fill: "#e5e7eb" }}
         />
         <Tooltip
           contentStyle={{
@@ -50,7 +53,7 @@ export default function LineChart({
             borderRadius: "var(--radius)",
           }}
         />
-        <Legend />
+        <Legend wrapperStyle={{ color: "#e5e7eb" }} />
         <Line
           type="monotone"
           dataKey={yKey}

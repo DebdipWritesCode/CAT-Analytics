@@ -4,6 +4,7 @@ import { SheetData } from "@/lib/types";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import StackedBarChart from "@/components/charts/StackedBarChart";
 import MultiLineChart from "@/components/charts/MultiLineChart";
+import { CHART_COLORS, getSectionColor } from "@/lib/colors";
 
 interface SectionalTimeUsageProps {
   data: SheetData;
@@ -74,9 +75,9 @@ export default function SectionalTimeUsage({ data }: SectionalTimeUsageProps) {
             data={timeUsage}
             xKey="section"
             bars={[
-              { name: "Planned", dataKey: "Planned", color: "hsl(var(--chart-1))" },
-              { name: "Actual", dataKey: "Actual", color: "hsl(var(--chart-2))" },
-              { name: "Wasted", dataKey: "Wasted", color: "hsl(var(--chart-3))" },
+              { name: "Planned", dataKey: "Planned", color: CHART_COLORS.stacked.planned },
+              { name: "Actual", dataKey: "Actual", color: CHART_COLORS.stacked.actual },
+              { name: "Wasted", dataKey: "Wasted", color: CHART_COLORS.stacked.wasted },
             ]}
             xLabel="Section"
             yLabel="Time (minutes)"
@@ -94,9 +95,9 @@ export default function SectionalTimeUsage({ data }: SectionalTimeUsageProps) {
             data={timeScoreData}
             xKey="mockNo"
             lines={[
-              { name: "VARC Time", dataKey: "VARC", color: "hsl(var(--chart-1))" },
-              { name: "DILR Time", dataKey: "DILR", color: "hsl(var(--chart-2))" },
-              { name: "QA Time", dataKey: "QA", color: "hsl(var(--chart-3))" },
+              { name: "VARC Time", dataKey: "VARC", color: getSectionColor("VARC") },
+              { name: "DILR Time", dataKey: "DILR", color: getSectionColor("DILR") },
+              { name: "QA Time", dataKey: "QA", color: getSectionColor("QA") },
             ]}
             xLabel="Mock"
             yLabel="Time Used (minutes)"
