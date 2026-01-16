@@ -289,11 +289,15 @@ export function parseSheetData(rawData: Record<string, any[][]>): SheetData {
         date: obj["Date"] || "",
         section: (obj["Section"] || "VARC") as "VARC" | "DILR" | "QA",
         topic: obj["Topic"] || "",
-        errorType: (obj["Error Type"] || obj["ErrorType"] || "Concept") as
-          | "Concept"
-          | "Silly"
-          | "Reading"
-          | "Time",
+        errorType: (() => {
+          const errorTypeStr = (obj["Error Type"] || obj["ErrorType"] || "Concept").toLowerCase().trim();
+          if (errorTypeStr.includes("concept")) return "Concept";
+          if (errorTypeStr.includes("silly")) return "Silly";
+          if (errorTypeStr.includes("reading")) return "Reading";
+          if (errorTypeStr.includes("time") || errorTypeStr.includes("misjudgment")) return "Time";
+          if (errorTypeStr.includes("guess")) return "Guess";
+          return "Concept"; // Default
+        })() as "Concept" | "Silly" | "Reading" | "Time" | "Guess",
         exactMistake: obj["Exact Mistake"] || obj["ExactMistake"] || "",
         correctThoughtProcess:
           obj["Correct Thought Process"] || obj["CorrectThoughtProcess"] || "",

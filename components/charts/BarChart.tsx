@@ -9,6 +9,7 @@ import {
   Tooltip,
   Legend,
   ResponsiveContainer,
+  Cell,
 } from "recharts";
 import { CHART_COLORS } from "@/lib/colors";
 
@@ -59,7 +60,11 @@ export default function BarChart({
         />
         <Legend wrapperStyle={{ color: "#e5e7eb" }} />
         {bars.map((bar) => (
-          <Bar key={bar.dataKey} dataKey={bar.dataKey} name={bar.name} fill={bar.color} />
+          <Bar key={bar.dataKey} dataKey={bar.dataKey} name={bar.name} fill={bar.color}>
+            {data.map((entry: any, index: number) => (
+              <Cell key={`cell-${index}`} fill={entry.color || bar.color} />
+            ))}
+          </Bar>
         ))}
       </RechartsBarChart>
     </ResponsiveContainer>

@@ -77,7 +77,7 @@ export interface ErrorLog {
   date: string;
   section: "VARC" | "DILR" | "QA";
   topic: string;
-  errorType: "Concept" | "Silly" | "Reading" | "Time";
+  errorType: "Concept" | "Silly" | "Reading" | "Time" | "Guess";
   exactMistake: string;
   correctThoughtProcess: string;
   howToPreventNextTime: string;
